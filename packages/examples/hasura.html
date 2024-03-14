@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Monaco Language Client HML Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <h2>Monaco Language Client HML Example</h2>
+    <div id="container" style="width:800px;height:600px;border:1px solid grey"></div>
+    <script crossorigin="anonymous" type="module">
+        import { startHMLClient } from "./src/hasura/client/main.ts";
+    let  workerScript = './languageserver-web.js'
+    console.log('reached here');
+    console.log('URL', workerScript);
+    const worker = new Worker(workerScript);
+    worker.onmessage = (event) =>{
+        console.log( 'RECIEVED message', JSON.stringify(event.data));
+    };
+    worker.postMessage("HI")
+    console.log('reached here 2');
+    startHMLClient(worker);
+    </script>
+</body>
+
+</html>

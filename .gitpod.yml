@@ -1,0 +1,8 @@
+ports:
+  - port: 30000
+  - port: 30001
+  - port: 8080
+tasks:
+  - before: bash scripts/auth.sh
+    init: npm i
+    command: npm run build
